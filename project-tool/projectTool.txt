@@ -1,0 +1,116 @@
+shoping cart part
+// ShoppingCart.js---------------------------
+import React from 'react';
+
+const ShoppingCart = ({ cartItems, removeFromCart }) => {
+  return (
+    <div>
+      <h2>Shopping Cart</h2>
+      {cartItems.map(item => (
+        <div key={item.id}>
+          <p>{item.title}</p>
+          <button onClick={() => removeFromCart(item.id)}>Remove</button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ShoppingCart;
+
+// Auth.js-----------------------------------------------
+import React, { useState } from 'react';
+
+const Auth = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // Handle login logic
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    // Handle logout logic
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <div>
+      {!isLoggedIn ? (
+        <form onSubmit={handleLogin}>
+          <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <button type="submit">Login</button>
+        </form>
+      ) : (
+        <button onClick={handleLogout}>Logout</button>
+      )}
+    </div>
+  );
+};
+
+export default Auth;
+
+// BookDetails.js-----------------------------------
+import React from 'react';
+
+const BookDetails = ({ book }) => {
+  return (
+    <div>
+      <h2>{book.title}</h2>
+      <img src={book.cover} alt={book.title} />
+      <p>Author: {book.author}</p>
+      <p>Description: {book.description}</p>
+      <p>Price: ${book.price}</p>
+    </div>
+  );
+};
+
+export default BookDetails;
+
+// SearchBar.js
+import React from 'react';
+
+const SearchBar = ({ handleSearch }) => {
+  return (
+    <div>
+      <input type="text" onChange={e => handleSearch(e.target.value)} placeholder="Search..." />
+    </div>
+  );
+};
+
+export default SearchBar;
+
+// BookList.js
+import React from 'react';
+import BookItem from './BookItem';
+
+const BookList = ({ books }) => {
+  return (
+    <div>
+      {books.map(book => (
+        <BookItem key={book.id} book={book} />
+      ))}
+    </div>
+  );
+};
+
+export default BookList;
+
+// Homepage.js
+import React from 'react';
+import FeaturedBooks from './FeaturedBooks';
+
+const Homepage = () => {
+  return (
+    <div>
+      <h1>Featured Books</h1>
+      <FeaturedBooks />
+      {/* Other content */}
+    </div>
+  );
+};
+
+export default Homepage;
